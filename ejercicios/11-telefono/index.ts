@@ -1,6 +1,6 @@
 //Importo las clases
-import TelefonoConCamara from './TelefonoConCamara'
-import TelefonoConRadio from './TelefonoConRadio'
+import TelefonoConCamara from './Clases/TelefonoConCamara'
+import TelefonoConRadio from './Clases/TelefonoConRadio'
 
 //Creo los dos telefonos
 let telefonoConCamara :TelefonoConCamara = new TelefonoConCamara();

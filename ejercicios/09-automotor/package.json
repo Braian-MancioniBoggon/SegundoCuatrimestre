@@ -9,7 +9,7 @@
   "author": "braian alan mancioni boggon",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^18.7.23",
+    "@types/node": "^18.8.2",
     "readline-sync": "^1.4.10"
   }
 }

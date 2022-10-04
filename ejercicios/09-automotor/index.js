@@ -155,6 +155,7 @@ var mostrarMenu = function () {
         //Salir del programa
         case 0:
             break;
+        //Esta opción la agregué para poder ver el elemento "borrado" porque me da un error en el elemento vacío que queda en el arreglo y la puse para ver que ande bien el "borrado"
         case 5:
             console.log(registroAutomotor);
             break;

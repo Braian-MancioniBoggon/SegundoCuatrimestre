@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "@types/node": "^18.7.23",
+    "readline-sync": "^1.4.10"
+  },
+  "name": "arreglos",
+  "version": "1.0.0",
+  "main": "arreglosTxt.js",
+  "scripts": {
+    "convertir": "tsc arreglosTxt.ts",
+    "ejecutar": "node arreglosTxt.js"
+  },
+  "author": "braian alan mancioni boggon",
+  "license": "ISC",
+  "devDependencies": {},
+  "description": ""
+}

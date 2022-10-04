@@ -1,0 +1,15 @@
+{
+  "name": "automotor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "braian alan mancioni boggon",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.7.23",
+    "readline-sync": "^1.4.10"
+  }
+}

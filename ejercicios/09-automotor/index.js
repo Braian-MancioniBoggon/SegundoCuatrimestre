@@ -64,16 +64,28 @@ var agregarAuto = function (autosRegistrados) {
 };
 //Función para "borrar" un auto
 var borrarAuto = function (posicion) {
-    delete autosRegistrados[posicion];
+    if (posicion >= 0 && posicion < autosRegistrados.length) {
+        autosRegistrados.splice(posicion, 1);
+    }
+    else {
+        console.log("El vehiculo seleccionado no esta registrado");
+        borrarAuto(gestorDeAutos("eliminar"));
+    }
 };
 //Función para modificar un auto
 var modificarAuto = function (posicion) {
-    var marca = ReadlineSync.question("Ingrese la nueva marca del vehiculo: ");
-    var subMarca = ReadlineSync.question("Ingrese la nueva submarca del vehiculo: ");
-    var modelo = ReadlineSync.questionInt("Ingrese el nuevo modelo del vehiculo: ");
-    var autoModificado = new Auto(marca, subMarca, modelo);
-    delete autosRegistrados[posicion];
-    autosRegistrados[posicion] = autoModificado;
+    if (posicion >= 0 && posicion < autosRegistrados.length) {
+        var marca = ReadlineSync.question("Ingrese la nueva marca del vehiculo: ");
+        var subMarca = ReadlineSync.question("Ingrese la nueva submarca del vehiculo: ");
+        var modelo = ReadlineSync.questionInt("Ingrese el nuevo modelo del vehiculo: ");
+        var autoModificado = new Auto(marca, subMarca, modelo);
+        delete autosRegistrados[posicion];
+        autosRegistrados[posicion] = autoModificado;
+    }
+    else {
+        console.log("El vehiculo seleccionado no esta registrado");
+        modificarAuto(gestorDeAutos("modificar"));
+    }
 };
 //Función para hacer un separador en la consola
 var separador = function () {
@@ -97,7 +109,7 @@ var mostrarAutos = function () {
 //Función para utilizar las opciones de "borrar" y modificar un auto
 var gestorDeAutos = function (accion) {
     mostrarAutos();
-    var seleccionDeAuto = ReadlineSync.questionInt("Se " + accion + " el vehiculo numero: ");
+    var seleccionDeAuto = ReadlineSync.questionInt("Seleccione el numero de vehiculo a " + accion + ": ");
     seleccionDeAuto -= 1;
     return seleccionDeAuto;
 };
@@ -144,20 +156,16 @@ var mostrarMenu = function () {
             break;
         //Modificar un auto
         case 3:
-            modificarAuto(gestorDeAutos("modificara"));
+            modificarAuto(gestorDeAutos("modificar"));
             consultarNuevaSeleccion();
             break;
         //Borrar un auto
         case 4:
-            borrarAuto(gestorDeAutos("eliminara"));
+            borrarAuto(gestorDeAutos("eliminar"));
             consultarNuevaSeleccion();
             break;
         //Salir del programa
         case 0:
-            break;
-        //Esta opción la agregué para poder ver el elemento "borrado" porque me da un error en el elemento vacío que queda en el arreglo y la puse para ver que ande bien el "borrado"
-        case 5:
-            console.log(registroAutomotor);
             break;
         //Opción invalida
         default:

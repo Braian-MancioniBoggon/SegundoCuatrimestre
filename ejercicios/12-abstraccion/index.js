@@ -7,7 +7,7 @@ var Camioneta_1 = require("./Clases/Camioneta");
 //Función para hacer un separador en la consola
 var separador = function () {
     var guion = "-";
-    for (var guiones = 0; guiones < 15; guiones++) {
+    for (var guiones = 0; guiones < 50; guiones++) {
         guion += "-";
     }
     return guion;

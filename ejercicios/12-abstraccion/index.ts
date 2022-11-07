@@ -6,7 +6,7 @@ import Camioneta from './Clases/Camioneta'
 //Función para hacer un separador en la consola
 let separador = () :string => {
     let guion :string = "-";
-    for (let guiones :number = 0; guiones<15; guiones++){
+    for (let guiones :number = 0; guiones<50; guiones++){
         guion += "-";
     }
 

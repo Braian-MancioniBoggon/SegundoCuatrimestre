@@ -1,8 +1,6 @@
-//Importo las librerias que voy a utilizar
 import * as fs from 'fs';
 import * as ReadlineSync from 'readline-sync';
 
-//Creo la clase "Libro"
 class Libro {
     private titulo :string;
     private genero :string;
@@ -27,7 +25,6 @@ class Libro {
     }
 }
 
-//Creo la clase "Biblioteca" que va a contener un arreglo de "libros"
 class Biblioteca {
     private biblioteca :Array<Libro>;
 
@@ -35,8 +32,8 @@ class Biblioteca {
         this.biblioteca = biblioteca;
     }
 
-    public getBiblioteca() :Array<Libro>{
-        return this.biblioteca;
+    public getBiblioteca() :void{
+            console.log(this.biblioteca)
     }
 
     public crearLibro() :void{
@@ -47,9 +44,14 @@ class Biblioteca {
 
         this.biblioteca.push(nuevoLibro);
     }
-
-    public borrarLibro(posicion :number) :void {
-        delete this.biblioteca[posicion]
+    
+    public borrarLibro = (posicion: number) :void => {
+        if (posicion >= 0 && posicion < this.biblioteca.length){
+            this.biblioteca.splice(posicion,1);
+        } else {
+            //Si el libro no se encuentra sale un error
+            throw new ErrorAlMostrar("No se pudo encontrar el libro");
+        }
     }
 
     public modificarLibro(posicion: number) :void {
@@ -61,9 +63,17 @@ class Biblioteca {
         delete this.biblioteca[posicion];
         this.biblioteca[posicion] = libroModificado;
     }
+
+    public agregarLibro(biblioteca: Array<Libro>) :void {
+        let titulo :string = ReadlineSync.question("Ingrese el titulo del libro: ");
+        let genero :string = ReadlineSync.question("Ingrese el genero del libro: ");
+        let numeroDeSerie :number = ReadlineSync.questionInt("Ingrese el numero de serie del libro: ");
+        let nuevoLibro : Libro = new Libro(titulo, genero, numeroDeSerie);
+    
+        biblioteca.push(nuevoLibro);
+    }
 }
 
-// Creo la clase "GestorLibros" que permite leer un archivo de texto
 class GestorDeArchivos {
     private arregloString :string[];
 
@@ -81,7 +91,13 @@ class GestorDeArchivos {
     }
 }
 
-//Función para cargar los libros al arreglo
+class ErrorAlMostrar extends Error {
+    constructor(mensaje: string) {
+        super(mensaje);
+        this.name = "ErrorAlMostrar";
+    }
+}
+
 let cargarLibro = (libro :string, biblioteca: Array<Libro>) :void => {
     let bibliotecaAux :string[] = libro.split(',');
     let titulo: string = bibliotecaAux[0];
@@ -92,25 +108,30 @@ let cargarLibro = (libro :string, biblioteca: Array<Libro>) :void => {
     biblioteca.push(nuevoLibro);
 }
 
-//Función para agregar un Libro
-let agregarLibro = (biblioteca: Array<Libro>) :void => {
-    let titulo :string = ReadlineSync.question("Ingrese el titulo del libro: ");
-    let genero :string = ReadlineSync.question("Ingrese el genero del libro: ");
-    let numeroDeSerie :number = ReadlineSync.questionInt("Ingrese el numero de serie del libro: ");
-    let nuevoLibro : Libro = new Libro(titulo, genero, numeroDeSerie);
-
-    biblioteca.push(nuevoLibro);
-}
-
-//Función para modificar un libro
-
-
-//Cargo los datos de los libros a partir del archivo "libros.txt"
-let listaDeLibros: GestorDeArchivos = new GestorDeArchivos("libros.txt");
-let biblioteca : Array <Libro> = [];
-//Cargo los libros dentro del arreglo "biblioteca"
+let listaDeLibros :GestorDeArchivos = new GestorDeArchivos("libros.txt");
+let arregloBiblioteca :Array <Libro> = [];
 for (let i :number = 0; i < listaDeLibros.getArregloString().length; i++){
-    cargarLibro(listaDeLibros.getArregloString()[i], biblioteca);
+    cargarLibro(listaDeLibros.getArregloString()[i], arregloBiblioteca);
+}
+let biblioteca :Biblioteca = new Biblioteca(arregloBiblioteca);
+biblioteca.getBiblioteca();
+
+console.log("Borro el primer libro")
+
+//Uso try/catch
+try {
+    biblioteca.borrarLibro(0);
+} catch(err) {
+    console.log("Se produjo un error: " + err.message);
 }
 
-console.log(biblioteca);
+biblioteca.getBiblioteca();
+
+console.log("Fuerzo un error intentando borrar un libro que no está")
+
+//Uso try/catch
+try {
+    biblioteca.borrarLibro(2);
+} catch(err) {
+    console.log("Se produjo un error: " + err.message);
+}

@@ -7,8 +7,12 @@ class Alumno {
 
     public constructor(nombre: string, DNI:number, nota:number) {
         this.nombre = nombre;
-        this.DNI= DNI;
+        this.DNI = DNI;
         this.nota = nota;
+    }
+
+    public getDNI() : number {
+        return this.DNI;
     }
 
     public getNota() : number {
@@ -21,7 +25,7 @@ class Alumno {
         } else if (this.nota < 7 && this.nota > 0){
             console.log(`El alumnno ${this.nombre} esta desaprobado`);
         }else {
-            console.log("Lan nota es invalida");
+            throw new ErrorNota("La nota es invalida");
         }
     }
 }
@@ -37,17 +41,22 @@ class Profesor {
         this.listaAlumnos = listaAlumnos;
     }
 
+    public getNombre() : void {
+        console.log(this.nombre);
+    }
+
+    public getDNI() : number {
+        return this.DNI;
+    }
+
     public getListaAlumnos() : Alumno[] {
         return this.listaAlumnos;
     }
 
     //Lanzo un error
     public mostrarAlumnos(): void {
-        if (!this.listaAlumnos){
-            throw new ErrorAlMostrar("No se pudo mostrar un arreglo vacio");
-        } else {
-            console.log(this.listaAlumnos)
-        }
+        //Valido que el arreglo no esté vacío
+            console.log(this.listaAlumnos);
     }
 }
 
@@ -56,12 +65,22 @@ class Escuela {
     private direccion: string;
     private listaAlumnos : Array<Alumno>;
     private listaProfes : Array<Profesor>;
+    private intentos :number;
 
     public constructor(nombre: string, direccion :string, listaAlumnos: Array<Alumno>, listaProfes: Array<Profesor>){
         this.nombre= nombre;
         this.direccion =direccion;
         this.listaAlumnos = listaAlumnos;
         this.listaProfes = listaProfes;
+        this.intentos = 0;
+    }
+
+    public getNombre() : void {
+        console.log(this.nombre);
+    }
+
+    public getDireccion() : void {
+        console.log(this.direccion);
     }
 
     public getListaDeAlumnos(): Array<Alumno> {
@@ -74,10 +93,10 @@ class Escuela {
 
 }
 
-class ErrorAlMostrar extends Error {
+class ErrorNota extends Error {
     constructor(mensaje: string) {
         super(mensaje);
-        this.name = "ErrorAlMostrar";
+        this.name = "ErrorNota";
     }
 }
 
@@ -95,14 +114,6 @@ class GestorDeArchivos {
     public getArregloString(): string[] {
         return this.arregloString;
     }
-}
-
-let mostrarError = (arreglo) :void => {
-    if (arreglo){
-        throw new ErrorAlMostrar("No se pudo mostrar un arreglo vacio");
-    } else {
-        console.log(arreglo)
-    };
 }
 
 function crearProfe(profesor: string, arrayProfesor: Array<Profesor>, arrayAlumnos: Array<Alumno>) : void{
@@ -142,20 +153,23 @@ for (let i : number= 0; i < datos.getArregloString().length; i++){
     crearProfe(datos.getArregloString()[i], listaProfes, listaDeAlumnos);
 }
 
+let escuela :Escuela = new Escuela("Colegio San Jose","Av. Santagada y Colón",listaDeAlumnos,listaProfes);
 console.log(listaProfes);
 console.log(listaDeAlumnos);
+listaProfes[1].mostrarAlumnos();
 
-//Pruebo try/catch
+
+console.log("Valido si la nota es valida para saber si el alumno esta aprobado o no");
 try{
-    listaProfes[1].mostrarAlumnos();
+    listaDeAlumnos[0].estaAprobado()
 } catch(err) {
     console.log("Se produjo un error: " + err.message);
 }
 
-//Creo un arreglo vacío para mostrar un error
-let arregloError :string[] = [];
+
+console.log("Valido si la nota es valida para saber si el alumno esta aprobado o no");
 try{
-    mostrarError(arregloError);
+    listaDeAlumnos[1].estaAprobado()
 } catch(err) {
     console.log("Se produjo un error: " + err.message);
 }

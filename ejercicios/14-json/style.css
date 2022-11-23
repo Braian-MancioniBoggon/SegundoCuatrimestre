@@ -1,0 +1,46 @@
+body{
+    margin: 0;
+    background: #212123;
+    font-family: "Montserrat", sans-serif;
+}
+
+#contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.tarjeta {
+    background: #28282a;
+    margin: 15px;
+    float: left;
+    border-radius: 10px;
+    text-align: center;
+    display: grid;
+    place-items: center;
+}
+
+.tarjeta  img{
+    border-radius: 10px;
+}
+
+.tarjeta p{
+    color: #fff;
+}
+
+.titulo{
+    margin: 5px 15px 5px 15px;
+    font-style: italic;
+    font-size: 22px;    
+}
+
+.ubicacion{
+    margin: 5px 15px 15px 15px;
+    font-size: 14px;
+}
+
+.descripcion{
+    margin: 5px 15px 5px 15px;
+    font-size: 18px;
+}

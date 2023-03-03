@@ -1,0 +1,28 @@
+.contenedorPrincipal{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+.btns{
+    text-align: center;
+    margin-top: 100px;
+}
+
+.btns button{
+    margin: 5px 5px 5px 5px;
+}
+
+.texto{
+    text-align: center;
+}
+
+.imagen{
+    width: 400px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

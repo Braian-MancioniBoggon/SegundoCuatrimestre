@@ -1,0 +1,12 @@
+.contenedorFormularios form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+}
+
+.contenedorFormularios form input{
+    text-align: center;
+    margin-bottom: 8px;
+    padding: 3px;
+}

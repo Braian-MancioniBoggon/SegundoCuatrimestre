@@ -1,3 +1,5 @@
+import './Profile.css';
+
 //-----------------------
 //Ejercicio en clase N°1
 //-----------------------
@@ -49,7 +51,7 @@ import React from 'react'
 
 const Profile = () => {
   return (
-    <div>
+    <div className='primerComponente'>
         <h1>Hola Mundo de React!</h1>
         <p>Este es mi primer componente :D</p>
     </div>
